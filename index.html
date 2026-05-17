@@ -602,7 +602,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
 
   /* ── COMPTEURS ── */
   #chiffres {
-    background: rgba(0,0,0,0.25);
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
     padding: 50px 0;
     margin: 0 -40px 50px;
     scroll-margin-top: 56px;
@@ -637,6 +637,8 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
   }
 
   .counter-item:hover::before { opacity: 1; }
+
+  .counter-item:hover .counter-num { color: var(--accent); transition: color 0.3s; }
 
   .counter-icon {
     font-size: 1.5rem;
@@ -677,6 +679,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
     color: rgba(255,255,255,0.45);
     margin-top: 4px;
     font-style: italic;
+    opacity: 0.7;
   }
 
   /* Barre décorative sous le chiffre */
