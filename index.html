@@ -491,10 +491,213 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
     text-align: center;
   }
 
-  @media (max-width:900px) {
-    #contact { padding: 60px 20px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
-    .form-row { flex-direction: column; }
+  /* ── SLIDESHOW ── */
+  .slideshow-wrap {
+    position: relative;
+    max-width: 680px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: visible;
+  }
+
+  .slideshow {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #111;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: scale(1.03);
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Flèches */
+  .ss-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: var(--white);
+    font-size: 2.2rem;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10;
+    line-height: 1;
+  }
+
+  .ss-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ss-prev { left: -24px; }
+  .ss-next { right: -24px; }
+
+  /* Compteur */
+  .ss-counter {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    z-index: 10;
+  }
+
+  /* Miniatures */
+  .ss-thumbs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .ss-thumb {
+    width: 70px;
+    height: 94px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.5;
+    border: 2px solid transparent;
+    transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .ss-thumb:hover { opacity: 0.8; transform: translateY(-2px); }
+  .ss-thumb.active { opacity: 1; border-color: var(--accent); transform: translateY(-3px); }
+
+  @media (max-width: 900px) {
+    .ss-prev { left: -10px; }
+    .ss-next { right: -10px; }
+    .ss-btn { width: 40px; height: 40px; font-size: 1.6rem; }
+    .ss-thumb { width: 54px; height: 72px; }
+  }
+
+  /* ── COMPTEURS ── */
+  #chiffres {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+    padding: 60px 40px;
+    scroll-margin-top: 56px;
+  }
+
+  .counters-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .counter-item {
+    position: relative;
+    text-align: center;
+    padding: 28px 12px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+
+  .counter-item:last-child { border-right: none; }
+
+  .counter-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.04);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .counter-item:hover::before { opacity: 1; }
+
+  .counter-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  }
+
+  .counter-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .counter-suffix {
+    font-size: 1.6rem;
+    color: var(--accent);
+  }
+
+  .counter-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+  }
+
+  .counter-label small {
+    display: block;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* Barre décorative sous le chiffre */
+  .counter-num::after {
+    display: none;
+  }
+
+  .counter-item:hover .counter-num {
+    color: var(--accent);
+    transition: color 0.3s;
+  }
+
+  @media (max-width: 900px) {
+    #chiffres { padding: 50px 20px; }
+    .counters-wrap { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+    .counter-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .counter-item:last-child { border-bottom: none; grid-column: span 2; }
+  }
+
+  @media (max-width: 480px) {
+    .counters-wrap { grid-template-columns: 1fr; }
+    .counter-item:last-child { grid-column: span 1; }
   }
 
 </style>
@@ -506,7 +709,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
   <ul class="nav-links">
     <li><a href="#hero">Accueil</a></li>
     <li><a href="#parcours">Parcours</a></li>
-    <li><a href="portfolio.pdf" target="_blank">Portfolio</a></li>
+    <li><a href="#slideshow-section">Portfolio</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -533,7 +736,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
       <div class="hero-right">
         <div class="years-badge">⭐ 30 ans d'expérience</div>
         <h1 class="hero-headline">Communication<br><span>Publique &</span><br>Institutionnelle</h1>
-        <p class="hero-desc">Stratégie de communication, gestion de projets print, digitaux et événementiels. Rédaction éditoriale, évaluation des politiques publiques et pilotage budgétaire.</p>
+        <p class="hero-desc">Je recherche une collectivité avec un projet de territoire ambitieux, où la communication joue un rôle central dans le lien entre l'institution et ses habitants.</p>
         <div class="info-chips">
           <span class="chip">🏛️ Fonctionnaire FPT</span>
           <span class="chip">📋 Rédacteur principal 1ère classe</span>
@@ -544,6 +747,31 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
       </div>
     </div>
   </header>
+</section>
+
+<section id="chiffres">
+  <div class="counters-wrap">
+    <div class="counter-item" data-target="65" data-suffix="">
+      <div class="counter-num"><span class="count">0</span></div>
+      <div class="counter-label">Magazines<br>intercommunaux</div>
+      <div class="counter-icon">📰</div>
+    </div>
+    <div class="counter-item" data-target="100" data-suffix="+">
+      <div class="counter-num"><span class="count">0</span><span class="counter-suffix">+</span></div>
+      <div class="counter-label">Campagnes de com'<br><small>enfance-jeunesse, habitat,<br>économie, environnement…</small></div>
+      <div class="counter-icon">📣</div>
+    </div>
+    <div class="counter-item" data-target="5" data-suffix="">
+      <div class="counter-num"><span class="count">0</span></div>
+      <div class="counter-label">Enquêtes & études<br>de besoins</div>
+      <div class="counter-icon">📊</div>
+    </div>
+    <div class="counter-item" data-target="8" data-suffix="">
+      <div class="counter-num"><span class="count">0</span></div>
+      <div class="counter-label">Sites web & applis<br>mobiles institutionnels</div>
+      <div class="counter-icon">🌐</div>
+    </div>
+  </div>
 </section>
 
 <section id="parcours">
@@ -635,8 +863,8 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
           <div class="skill-row"><span class="skill-name">Adobe CC Print (Ai, Ps, Id)</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
           <div class="skill-row"><span class="skill-name">Adobe CC Vidéo (Lr, Pr)</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
           <div class="skill-row"><span class="skill-name">Rédaction de contenus</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
-          <div class="skill-row"><span class="skill-name">Développement web</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
-          <div class="skill-row"><span class="skill-name">Réseaux sociaux</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Réseaux sociaux</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+          <div class="skill-row"><span class="skill-name">Développement web</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
           <div class="skill-row"><span class="skill-name">Conception graphique</span><div class="skill-bar"><div class="skill-fill" style="width:93%"></div></div></div>
           <div class="skill-row"><span class="skill-name">Gestion de projet</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
         </div>
@@ -663,7 +891,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
   <div class="portfolio-inner">
     <div class="portfolio-header">
       <div class="dot"></div>
-      <h2>Domaines d'expertise</h2>
+      <h2>De la stratégie au terrain</h2>
       <div class="line"></div>
     </div>
     <p class="portfolio-sub">Des compétences transversales et complémentaires, au service de la communication et de l'action publique territoriale.</p>
@@ -752,9 +980,32 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
 
     </div>
 
-    <div style="text-align:center">
-      <a href="portfolio.pdf" target="_blank" class="dl-btn">📄 Consulter mon portfolio de réalisations (PDF)</a>
+    <!-- SLIDESHOW -->
+    <div class="slideshow-wrap" id="slideshow-section">
+      <div class="slideshow" id="slideshow">
+        <div class="slide active"><img src="portfolio_p1.jpg" alt="Portfolio page 1"></div>
+        <div class="slide"><img src="portfolio_p2.jpg" alt="Portfolio page 2"></div>
+        <div class="slide"><img src="portfolio_p3.jpg" alt="Portfolio page 3"></div>
+        <div class="slide"><img src="portfolio_p4.jpg" alt="Portfolio page 4"></div>
+      </div>
+
+      <!-- Flèches -->
+      <button class="ss-btn ss-prev" onclick="ssNav(-1)">&#8249;</button>
+      <button class="ss-btn ss-next" onclick="ssNav(1)">&#8250;</button>
+
+      <!-- Compteur -->
+      <div class="ss-counter"><span id="ss-cur">1</span> / 4</div>
+
+      <!-- Miniatures -->
+      <div class="ss-thumbs">
+        <img src="portfolio_p1.jpg" class="ss-thumb active" onclick="ssGo(0)" alt="Page 1">
+        <img src="portfolio_p2.jpg" class="ss-thumb" onclick="ssGo(1)" alt="Page 2">
+        <img src="portfolio_p3.jpg" class="ss-thumb" onclick="ssGo(2)" alt="Page 3">
+        <img src="portfolio_p4.jpg" class="ss-thumb" onclick="ssGo(3)" alt="Page 4">
+      </div>
     </div>
+
+
   </div>
 </section>
 
@@ -786,11 +1037,7 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
         </div>
         <div class="contact-detail">
           <div class="c-icon">📍</div>
-          <span>Guignicourt (02) — mobilité possible</span>
-        </div>
-        <div class="contact-detail">
-          <div class="c-icon">🌐</div>
-          <a href="https://www.picardiedeschateaux.fr" target="_blank">picardiedeschateaux.fr</a>
+          <span>Guignicourt (02)</span>
         </div>
       </div>
 
@@ -819,7 +1066,6 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
           <textarea id="f-message" placeholder="Votre message..."></textarea>
         </div>
         <div class="form-submit">
-          <span class="form-note">merci d'utiliser ce formulaire pour me contacter</span>
           <button class="btn-send" onclick="sendForm()">Envoyer ✉️</button>
         </div>
         <div class="form-success" id="formSuccess">
@@ -836,6 +1082,66 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
 </footer>
 
 <script>
+  // ── COMPTEURS ANIMÉS ──
+  const counters = document.querySelectorAll('.counter-item');
+
+  const observerCounters = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const item   = entry.target;
+        const target = parseInt(item.dataset.target);
+        const span   = item.querySelector('.count');
+        const duration = 1800;
+        const step   = Math.ceil(target / (duration / 16));
+        let current  = 0;
+
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          span.textContent = current;
+        }, 16);
+
+        observerCounters.unobserve(item);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counters.forEach(c => observerCounters.observe(c));
+  let ssIndex = 0;
+  const slides  = document.querySelectorAll('.slide');
+  const thumbs  = document.querySelectorAll('.ss-thumb');
+  const counter = document.getElementById('ss-cur');
+
+  function ssShow(n) {
+    slides[ssIndex].classList.remove('active');
+    thumbs[ssIndex].classList.remove('active');
+    ssIndex = (n + slides.length) % slides.length;
+    slides[ssIndex].classList.add('active');
+    thumbs[ssIndex].classList.add('active');
+    counter.textContent = ssIndex + 1;
+  }
+
+  function ssNav(dir) { ssShow(ssIndex + dir); }
+  function ssGo(n)    { ssShow(n); }
+
+  // Navigation clavier
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') ssNav(1);
+    if (e.key === 'ArrowLeft')  ssNav(-1);
+  });
+
+  // Swipe tactile
+  let touchStartX = 0;
+  document.querySelector('.slideshow').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.querySelector('.slideshow').addEventListener('touchend',   e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) ssNav(diff > 0 ? 1 : -1);
+  });
+
+  // Contact form
   function sendForm() {
     const prenom  = document.getElementById('f-prenom').value.trim();
     const nom     = document.getElementById('f-nom').value.trim();
@@ -854,8 +1160,6 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
     );
 
     window.location.href = `mailto:christopheflorentin33@gmail.com?subject=${subject}&body=${body}`;
-
-    // Affiche le message de confirmation
     document.getElementById('formSuccess').style.display = 'block';
     setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
   }
