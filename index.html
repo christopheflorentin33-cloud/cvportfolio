@@ -325,11 +325,33 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
     .main { grid-template-columns:1fr; padding:48px 20px; gap:40px; }
     #portfolio { padding:60px 20px; }
     .skills-cards-grid { grid-template-columns:repeat(2,1fr); }
+    /* Contact : formulaire passe en dessous sur mobile */
+    .contact-grid { grid-template-columns:1fr; gap:32px; }
+    .form-row { flex-direction:column; }
+    #contact { padding:60px 20px; }
   }
 
   @media (max-width:560px) {
     .nav-links { display:none; }
     .skills-cards-grid { grid-template-columns:repeat(2,1fr); }
+
+    /* Cartes compétences : texte réduit et overlay toujours visible sur mobile */
+    .sk-card { aspect-ratio: 4/5; }
+    .sk-hover {
+      opacity: 1;
+      background: rgba(10, 60, 72, 0.88);
+      padding: 12px 10px;
+      justify-content: flex-end;
+    }
+    .sk-hover .sk-icon { font-size: 1.4rem; margin-bottom: 5px; }
+    .sk-hover h4 { font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 5px; }
+    .sk-hover p { font-size: 0.65rem; line-height: 1.4; }
+    .sk-title-bar { display: none; }
+
+    /* Contact mobile */
+    .contact-grid { grid-template-columns:1fr; gap:28px; }
+    #contact { padding:50px 16px; }
+    .form-row { flex-direction:column; }
   }
   /* ── CONTACT FORM ── */
   #contact {
