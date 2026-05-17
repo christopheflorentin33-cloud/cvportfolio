@@ -367,10 +367,16 @@ footer { text-align:center; padding:28px; background:var(--teal-dark); color:rgb
 
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.6fr;
+    grid-template-columns: 1fr;
     gap: 50px;
     align-items: start;
     margin-top: 36px;
+  }
+
+  @media (min-width: 700px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.6fr;
+    }
   }
 
   .contact-info-block {
